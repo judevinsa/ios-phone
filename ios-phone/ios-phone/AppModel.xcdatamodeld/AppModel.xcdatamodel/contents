@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14D131" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="IPCall" representedClassName="IPCall" syncable="YES">
         <attribute name="callDate" attributeType="Date" defaultDateTimeInterval="0" syncable="YES"/>
-        <relationship name="caller" maxCount="1" deletionRule="Cascade" destinationEntity="IPContact" syncable="YES"/>
+        <relationship name="caller" maxCount="1" deletionRule="Deny" destinationEntity="IPContact" syncable="YES"/>
     </entity>
     <entity name="IPContact" representedClassName="IPContact" syncable="YES">
         <attribute name="firstName" attributeType="String" defaultValueString="John" syncable="YES"/>

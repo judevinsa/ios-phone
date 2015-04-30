@@ -7,17 +7,29 @@
 //
 
 #import "IPContactsNavigationController.h"
+#import "IPContact.h"
 
-@interface IPContactsNavigationController ()
+@interface IPContactsNavigationController () {
+    NSArray * _contactList;
+}
 
 @end
 
 @implementation IPContactsNavigationController
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController managedObjectContext:(NSManagedObjectContext *)managedObjectContext{
+    self = [super initWithRootViewController:rootViewController];
     if (self) {
-        
+        if (managedObjectContext) {
+            NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription * entityDescription = [NSEntityDescription entityForName:@"IPContact" inManagedObjectContext:managedObjectContext];
+            [fetchRequest setEntity:entityDescription];
+            NSError * error;
+            _contactList = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            if (error) {
+                NSLog(@"%@\n",error);
+            }
+        }
     }
     return self;
 }
