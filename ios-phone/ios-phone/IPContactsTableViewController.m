@@ -8,11 +8,30 @@
 
 #import "IPContactsTableViewController.h"
 
-@interface IPContactsTableViewController ()
+@interface IPContactsTableViewController () {
+    NSArray * _contactList;
+}
 
 @end
 
 @implementation IPContactsTableViewController
+
+- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    self = [super init];
+    if (self) {
+        if (managedObjectContext) {
+            NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription * entityDescription = [NSEntityDescription entityForName:@"IPContact" inManagedObjectContext:managedObjectContext];
+            [fetchRequest setEntity:entityDescription];
+            NSError * error;
+            _contactList = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            if (error) {
+                NSLog(@"%@\n",error);
+            }
+        }
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

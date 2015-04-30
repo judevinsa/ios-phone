@@ -43,8 +43,8 @@
     IPCallsNavigationController * callsNavigationController = [[IPCallsNavigationController alloc] initWithRootViewController:callsTableViewController];
 
     // Then the views relative to the third tab
-    IPContactsTableViewController * contactsTableViewController = [[IPContactsTableViewController alloc] init];
-    IPContactsNavigationController * contactsNavigationController = [[IPContactsNavigationController alloc] initWithRootViewController:contactsTableViewController managedObjectContext:[self managedObjectContext]];
+    IPContactsTableViewController * contactsTableViewController = [[IPContactsTableViewController alloc] initWithManagedObjectContext:[self managedObjectContext]];
+    IPContactsNavigationController * contactsNavigationController = [[IPContactsNavigationController alloc] initWithRootViewController:contactsTableViewController];
 
     // Then the views relative to the fourth tab
     IPDialerViewController * dialerViewController = [[IPDialerViewController alloc] init];
