@@ -7,6 +7,13 @@
 //
 
 #import "IPAppDelegate.h"
+#import "IPFavoritesNavigationController.h"
+#import "IPFavoritesTableViewController.h"
+#import "IPCallsNavigationController.h"
+#import "IPCallsTableViewController.h"
+#import "IPContactsNavigationController.h"
+#import "IPContactsTableViewController.h"
+#import "IPDialerViewController.h"
 
 @interface IPAppDelegate ()
 
@@ -16,30 +23,58 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    // We first define the tabBarController
+    UITabBarController * mainTabBarController = [[UITabBarController alloc] init];
+
+    // Then the views relative to the first tab
+    IPFavoritesTableViewController * favoritesTableViewController = [[IPFavoritesTableViewController alloc] init];
+    IPFavoritesNavigationController * favoritesNavigationController = [[IPFavoritesNavigationController alloc] initWithRootViewController:favoritesTableViewController];
+
+    // Then the views relative to the second tab
+    IPCallsTableViewController * callsTableViewController = [[IPCallsTableViewController alloc] init];
+    IPCallsNavigationController * callsNavigationController = [[IPCallsNavigationController alloc] initWithRootViewController:callsTableViewController];
+
+    // Then the views relative to the third tab
+    IPContactsTableViewController * contactsTableViewController = [[IPContactsTableViewController alloc] init];
+    IPContactsNavigationController * contactsNavigationController = [[IPContactsNavigationController alloc] initWithRootViewController:contactsTableViewController];
+
+    // Then the views relative to the fourth tab
+    IPDialerViewController * dialerViewController = [[IPDialerViewController alloc] init];
+
+    // We set the tabBarItems
+    favoritesNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites" image:nil tag:0];
+    callsNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Calls" image:nil tag:1];
+    contactsNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Contacts" image:nil tag:2];
+    dialerViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Dialer" image:nil tag:3];
+
+
+    // We set the controllers that will go in the tabs
+    NSArray * tabItems = [NSArray arrayWithObjects:favoritesNavigationController, callsNavigationController, contactsNavigationController, dialerViewController, nil];
+    [mainTabBarController setViewControllers:tabItems animated:YES];
+
+    // We finally say that the tabBar is the main controller
+    _window.rootViewController = mainTabBarController;
+
+    [_window makeKeyAndVisible];
+
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end
