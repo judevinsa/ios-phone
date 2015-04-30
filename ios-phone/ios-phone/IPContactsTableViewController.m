@@ -7,12 +7,16 @@
 //
 
 #import "IPContactsTableViewController.h"
+#import "IPContactsTableViewCell.h"
+#import "IPContact.h"
 
 @interface IPContactsTableViewController () {
     NSArray * _contactList;
 }
 
 @end
+
+static NSString * sCellIdentifier = @"contactsCellIdentifier";
 
 @implementation IPContactsTableViewController
 
@@ -33,25 +37,40 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Contacts";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addAContact:)];
+    [_contactsTableView registerNib:[UINib nibWithNibName:@"IPContactsTableCellView" bundle:nil] forCellReuseIdentifier:sCellIdentifier];
 }
+
+
 
 #pragma mark - UITableViewDelegate
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _contactList.count;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    IPContactsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:sCellIdentifier forIndexPath:indexPath];
+    IPContact * contact = _contactList[indexPath.row];
+    cell.firstNameLabel.text = contact.firstName;
+    cell.lastNameLabel.text = contact.lastName;
+    return cell;
+}
+
+#pragma mark - Action Handlers
+
+- (void)addAContact:(id)sender {
+
 }
 
 @end

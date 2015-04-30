@@ -27,6 +27,8 @@
 		3EDEE4791AF276920092D6F7 /* AppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE4771AF276920092D6F7 /* AppModel.xcdatamodeld */; };
 		3EDEE47C1AF27F660092D6F7 /* IPContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE47B1AF27F660092D6F7 /* IPContact.m */; };
 		3EDEE47F1AF27F840092D6F7 /* IPCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE47E1AF27F840092D6F7 /* IPCall.m */; };
+		3EDEE4831AF28C850092D6F7 /* IPContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */; };
+		3EDEE4841AF28C850092D6F7 /* IPContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDEE4821AF28C850092D6F7 /* IPContactsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,9 @@
 		3EDEE47B1AF27F660092D6F7 /* IPContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPContact.m; sourceTree = "<group>"; };
 		3EDEE47D1AF27F840092D6F7 /* IPCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCall.h; sourceTree = "<group>"; };
 		3EDEE47E1AF27F840092D6F7 /* IPCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCall.m; sourceTree = "<group>"; };
+		3EDEE4801AF28C850092D6F7 /* IPContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPContactsTableViewCell.h; sourceTree = "<group>"; };
+		3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPContactsTableViewCell.m; sourceTree = "<group>"; };
+		3EDEE4821AF28C850092D6F7 /* IPContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPContactsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +182,7 @@
 				3EDEE4571AF25AB30092D6F7 /* IPFavoritesTableViewController.xib */,
 				3EDEE45E1AF25D430092D6F7 /* IPCallsTableViewController.xib */,
 				3EDEE46A1AF262A60092D6F7 /* IPContactsTableViewController.xib */,
+				3EDEE4821AF28C850092D6F7 /* IPContactsTableViewCell.xib */,
 				3EDEE4721AF265720092D6F7 /* IPDialerViewController.xib */,
 				3EDEE4371AF2388C0092D6F7 /* LaunchScreen.xib */,
 			);
@@ -186,6 +192,8 @@
 		3EDEE45A1AF25B5D0092D6F7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3EDEE4801AF28C850092D6F7 /* IPContactsTableViewCell.h */,
+				3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -296,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EDEE46C1AF262A60092D6F7 /* IPContactsTableViewController.xib in Resources */,
+				3EDEE4841AF28C850092D6F7 /* IPContactsTableViewCell.xib in Resources */,
 				3EDEE4591AF25AB30092D6F7 /* IPFavoritesTableViewController.xib in Resources */,
 				3EDEE4391AF2388C0092D6F7 /* LaunchScreen.xib in Resources */,
 				3EDEE4601AF25D430092D6F7 /* IPCallsTableViewController.xib in Resources */,
@@ -329,6 +338,7 @@
 				3EDEE47F1AF27F840092D6F7 /* IPCall.m in Sources */,
 				3EDEE46F1AF264310092D6F7 /* IPContactsNavigationController.m in Sources */,
 				3EDEE42B1AF2388C0092D6F7 /* main.m in Sources */,
+				3EDEE4831AF28C850092D6F7 /* IPContactsTableViewCell.m in Sources */,
 				3EDEE4791AF276920092D6F7 /* AppModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
