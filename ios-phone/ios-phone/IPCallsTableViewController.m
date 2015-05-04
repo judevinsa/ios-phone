@@ -51,6 +51,10 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 
 #pragma mark - UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44.0f;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,11 +78,11 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
         cell.contactFirstNameLabel.textColor = [UIColor redColor];
         cell.contactLastNameLabel.textColor = [UIColor redColor];
         cell.dateLabel.textColor = [UIColor redColor];
-    } else if (![_notMissedCalls containsObject:_callList[indexPath.row]]) {
+    } else if (![_notMissedCalls containsObject:_callList[indexPath.row]]
+               ) {
         [_notMissedCalls addObject:_callList[indexPath.row]];
         [_notMissedIndexPaths addObject:indexPath];
     }
-
     return cell;
 }
 
@@ -93,7 +97,6 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
         [_callsTableView beginUpdates];
         [_callsTableView insertRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
         [_callsTableView endUpdates];
-
     } else if (_filterSegmentedControl.selectedSegmentIndex == 1) {
         for (NSDictionary * call in _notMissedCalls) {
             [_callList removeObjectAtIndex:[[call valueForKey:@"index"] integerValue]];
