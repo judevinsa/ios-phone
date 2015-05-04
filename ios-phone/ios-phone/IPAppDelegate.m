@@ -55,7 +55,6 @@
     contactsNavigationController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Contacts" image:nil tag:2];
     dialerViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Dialer" image:nil tag:3];
 
-
     // We set the controllers that will go in the tabs
     NSArray * tabItems = [NSArray arrayWithObjects:favoritesNavigationController, callsNavigationController, contactsNavigationController, dialerViewController, nil];
     [mainTabBarController setViewControllers:tabItems animated:YES];

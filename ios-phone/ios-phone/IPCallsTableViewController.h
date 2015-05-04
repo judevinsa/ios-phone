@@ -11,4 +11,5 @@
 @interface IPCallsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView * callsTableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl * filterSegmentedControl;
 @end
