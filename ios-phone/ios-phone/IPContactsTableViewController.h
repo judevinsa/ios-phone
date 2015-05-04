@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface IPContactsTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+// Outlets
 @property (weak, nonatomic) IBOutlet UITableView * contactsTableView;
+
+- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjecContext;
 @end

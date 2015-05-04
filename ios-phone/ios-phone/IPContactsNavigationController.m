@@ -7,6 +7,7 @@
 //
 
 #import "IPContactsNavigationController.h"
+#import "IPContact.h"
 
 @interface IPContactsNavigationController ()
 

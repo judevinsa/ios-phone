@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCallsTableViewController">
             <connections>
                 <outlet property="callsTableView" destination="drq-W6-aQR" id="YIP-gN-iHl"/>
+                <outlet property="filterSegmentedControl" destination="tMf-HD-97s" id="OGd-rJ-9i6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,17 +16,37 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="drq-W6-aQR" userLabel="callsTableView">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bcm-aX-dez">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="drq-W6-aQR" userLabel="callsTableView">
+                            <rect key="frame" x="0.0" y="44" width="600" height="534"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tMf-HD-97s" userLabel="allMissedSegmentedControl">
+                            <rect key="frame" x="225" y="8" width="150" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="3bR-ga-m9R"/>
+                            </constraints>
+                            <segments>
+                                <segment title="All"/>
+                                <segment title="Missed"/>
+                            </segments>
+                        </segmentedControl>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="drq-W6-aQR" firstAttribute="top" secondItem="tMf-HD-97s" secondAttribute="bottom" constant="8" id="4UG-Qq-OG2"/>
+                        <constraint firstAttribute="centerX" secondItem="tMf-HD-97s" secondAttribute="centerX" id="SFn-rL-c1d"/>
+                        <constraint firstItem="tMf-HD-97s" firstAttribute="top" secondItem="Bcm-aX-dez" secondAttribute="top" constant="8" id="gDS-98-5Um"/>
+                    </constraints>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="drq-W6-aQR" secondAttribute="trailing" id="67t-Hk-e2J"/>
-                <constraint firstItem="drq-W6-aQR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Byw-Sb-Awy"/>
-                <constraint firstItem="drq-W6-aQR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NUv-mm-AmF"/>
-                <constraint firstAttribute="bottom" secondItem="drq-W6-aQR" secondAttribute="bottom" id="RJw-Qd-f6h"/>
+                <constraint firstAttribute="trailing" secondItem="Bcm-aX-dez" secondAttribute="trailing" id="VVN-mj-Fga"/>
+                <constraint firstItem="Bcm-aX-dez" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="giC-gS-yzC"/>
+                <constraint firstItem="Bcm-aX-dez" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kzB-KK-oOl"/>
+                <constraint firstAttribute="bottom" secondItem="Bcm-aX-dez" secondAttribute="bottom" id="muf-hy-bKE"/>
             </constraints>
         </view>
     </objects>

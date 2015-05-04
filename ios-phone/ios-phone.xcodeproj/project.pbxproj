@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3ED58D251AF76C0000A0ED37 /* IPNewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58D231AF76C0000A0ED37 /* IPNewContactViewController.m */; };
+		3ED58D261AF76C0000A0ED37 /* IPNewContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58D241AF76C0000A0ED37 /* IPNewContactViewController.xib */; };
+		3ED58D2A1AF79E1C00A0ED37 /* IPCallTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58D281AF79E1C00A0ED37 /* IPCallTableViewCell.m */; };
+		3ED58D2B1AF79E1C00A0ED37 /* IPCallTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58D291AF79E1C00A0ED37 /* IPCallTableViewCell.xib */; };
 		3EDEE42B1AF2388C0092D6F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE42A1AF2388C0092D6F7 /* main.m */; };
 		3EDEE42E1AF2388C0092D6F7 /* IPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE42D1AF2388C0092D6F7 /* IPAppDelegate.m */; };
 		3EDEE4361AF2388C0092D6F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EDEE4351AF2388C0092D6F7 /* Images.xcassets */; };
@@ -23,6 +27,12 @@
 		3EDEE46F1AF264310092D6F7 /* IPContactsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE46E1AF264310092D6F7 /* IPContactsNavigationController.m */; };
 		3EDEE4731AF265720092D6F7 /* IPDialerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE4711AF265720092D6F7 /* IPDialerViewController.m */; };
 		3EDEE4741AF265720092D6F7 /* IPDialerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDEE4721AF265720092D6F7 /* IPDialerViewController.xib */; };
+		3EDEE4761AF274390092D6F7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EDEE4751AF274390092D6F7 /* CoreData.framework */; };
+		3EDEE4791AF276920092D6F7 /* AppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE4771AF276920092D6F7 /* AppModel.xcdatamodeld */; };
+		3EDEE47C1AF27F660092D6F7 /* IPContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE47B1AF27F660092D6F7 /* IPContact.m */; };
+		3EDEE47F1AF27F840092D6F7 /* IPCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE47E1AF27F840092D6F7 /* IPCall.m */; };
+		3EDEE4831AF28C850092D6F7 /* IPContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */; };
+		3EDEE4841AF28C850092D6F7 /* IPContactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EDEE4821AF28C850092D6F7 /* IPContactsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3ED58D221AF76C0000A0ED37 /* IPNewContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPNewContactViewController.h; sourceTree = "<group>"; };
+		3ED58D231AF76C0000A0ED37 /* IPNewContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPNewContactViewController.m; sourceTree = "<group>"; };
+		3ED58D241AF76C0000A0ED37 /* IPNewContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPNewContactViewController.xib; sourceTree = "<group>"; };
+		3ED58D271AF79E1C00A0ED37 /* IPCallTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCallTableViewCell.h; sourceTree = "<group>"; };
+		3ED58D281AF79E1C00A0ED37 /* IPCallTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCallTableViewCell.m; sourceTree = "<group>"; };
+		3ED58D291AF79E1C00A0ED37 /* IPCallTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCallTableViewCell.xib; sourceTree = "<group>"; };
 		3EDEE4251AF2388C0092D6F7 /* ios-phone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-phone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EDEE4291AF2388C0092D6F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EDEE42A1AF2388C0092D6F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -64,6 +80,15 @@
 		3EDEE4701AF265720092D6F7 /* IPDialerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPDialerViewController.h; sourceTree = "<group>"; };
 		3EDEE4711AF265720092D6F7 /* IPDialerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPDialerViewController.m; sourceTree = "<group>"; };
 		3EDEE4721AF265720092D6F7 /* IPDialerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPDialerViewController.xib; sourceTree = "<group>"; };
+		3EDEE4751AF274390092D6F7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3EDEE4781AF276920092D6F7 /* AppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppModel.xcdatamodel; sourceTree = "<group>"; };
+		3EDEE47A1AF27F660092D6F7 /* IPContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPContact.h; sourceTree = "<group>"; };
+		3EDEE47B1AF27F660092D6F7 /* IPContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPContact.m; sourceTree = "<group>"; };
+		3EDEE47D1AF27F840092D6F7 /* IPCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCall.h; sourceTree = "<group>"; };
+		3EDEE47E1AF27F840092D6F7 /* IPCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCall.m; sourceTree = "<group>"; };
+		3EDEE4801AF28C850092D6F7 /* IPContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPContactsTableViewCell.h; sourceTree = "<group>"; };
+		3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPContactsTableViewCell.m; sourceTree = "<group>"; };
+		3EDEE4821AF28C850092D6F7 /* IPContactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPContactsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EDEE4761AF274390092D6F7 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +113,7 @@
 		3EDEE41C1AF2388C0092D6F7 = {
 			isa = PBXGroup;
 			children = (
+				3EDEE4751AF274390092D6F7 /* CoreData.framework */,
 				3EDEE4271AF2388C0092D6F7 /* ios-phone */,
 				3EDEE4411AF2388C0092D6F7 /* ios-phoneTests */,
 				3EDEE4261AF2388C0092D6F7 /* Products */,
@@ -155,6 +182,8 @@
 				3EDEE4691AF262A60092D6F7 /* IPContactsTableViewController.m */,
 				3EDEE4701AF265720092D6F7 /* IPDialerViewController.h */,
 				3EDEE4711AF265720092D6F7 /* IPDialerViewController.m */,
+				3ED58D221AF76C0000A0ED37 /* IPNewContactViewController.h */,
+				3ED58D231AF76C0000A0ED37 /* IPNewContactViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -164,7 +193,10 @@
 			children = (
 				3EDEE4571AF25AB30092D6F7 /* IPFavoritesTableViewController.xib */,
 				3EDEE45E1AF25D430092D6F7 /* IPCallsTableViewController.xib */,
+				3ED58D291AF79E1C00A0ED37 /* IPCallTableViewCell.xib */,
 				3EDEE46A1AF262A60092D6F7 /* IPContactsTableViewController.xib */,
+				3EDEE4821AF28C850092D6F7 /* IPContactsTableViewCell.xib */,
+				3ED58D241AF76C0000A0ED37 /* IPNewContactViewController.xib */,
 				3EDEE4721AF265720092D6F7 /* IPDialerViewController.xib */,
 				3EDEE4371AF2388C0092D6F7 /* LaunchScreen.xib */,
 			);
@@ -174,6 +206,10 @@
 		3EDEE45A1AF25B5D0092D6F7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3EDEE4801AF28C850092D6F7 /* IPContactsTableViewCell.h */,
+				3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */,
+				3ED58D271AF79E1C00A0ED37 /* IPCallTableViewCell.h */,
+				3ED58D281AF79E1C00A0ED37 /* IPCallTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -181,6 +217,11 @@
 		3EDEE45B1AF25CAB0092D6F7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3EDEE4771AF276920092D6F7 /* AppModel.xcdatamodeld */,
+				3EDEE47D1AF27F840092D6F7 /* IPCall.h */,
+				3EDEE47E1AF27F840092D6F7 /* IPCall.m */,
+				3EDEE47A1AF27F660092D6F7 /* IPContact.h */,
+				3EDEE47B1AF27F660092D6F7 /* IPContact.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -279,9 +320,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EDEE46C1AF262A60092D6F7 /* IPContactsTableViewController.xib in Resources */,
+				3EDEE4841AF28C850092D6F7 /* IPContactsTableViewCell.xib in Resources */,
+				3ED58D2B1AF79E1C00A0ED37 /* IPCallTableViewCell.xib in Resources */,
 				3EDEE4591AF25AB30092D6F7 /* IPFavoritesTableViewController.xib in Resources */,
 				3EDEE4391AF2388C0092D6F7 /* LaunchScreen.xib in Resources */,
 				3EDEE4601AF25D430092D6F7 /* IPCallsTableViewController.xib in Resources */,
+				3ED58D261AF76C0000A0ED37 /* IPNewContactViewController.xib in Resources */,
 				3EDEE4741AF265720092D6F7 /* IPDialerViewController.xib in Resources */,
 				3EDEE4361AF2388C0092D6F7 /* Images.xcassets in Resources */,
 			);
@@ -302,14 +346,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EDEE4581AF25AB30092D6F7 /* IPFavoritesTableViewController.m in Sources */,
+				3ED58D2A1AF79E1C00A0ED37 /* IPCallTableViewCell.m in Sources */,
 				3EDEE46B1AF262A60092D6F7 /* IPContactsTableViewController.m in Sources */,
 				3EDEE4671AF261720092D6F7 /* IPCallsNavigationController.m in Sources */,
 				3EDEE42E1AF2388C0092D6F7 /* IPAppDelegate.m in Sources */,
 				3EDEE45F1AF25D430092D6F7 /* IPCallsTableViewController.m in Sources */,
+				3EDEE47C1AF27F660092D6F7 /* IPContact.m in Sources */,
 				3EDEE4641AF2613B0092D6F7 /* IPFavoritesNavigationController.m in Sources */,
 				3EDEE4731AF265720092D6F7 /* IPDialerViewController.m in Sources */,
+				3EDEE47F1AF27F840092D6F7 /* IPCall.m in Sources */,
 				3EDEE46F1AF264310092D6F7 /* IPContactsNavigationController.m in Sources */,
 				3EDEE42B1AF2388C0092D6F7 /* main.m in Sources */,
+				3ED58D251AF76C0000A0ED37 /* IPNewContactViewController.m in Sources */,
+				3EDEE4831AF28C850092D6F7 /* IPContactsTableViewCell.m in Sources */,
+				3EDEE4791AF276920092D6F7 /* AppModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +542,7 @@
 				3EDEE44A1AF2388C0092D6F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3EDEE44B1AF2388C0092D6F7 /* Build configuration list for PBXNativeTarget "ios-phoneTests" */ = {
 			isa = XCConfigurationList;
@@ -500,8 +551,22 @@
 				3EDEE44D1AF2388C0092D6F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3EDEE4771AF276920092D6F7 /* AppModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3EDEE4781AF276920092D6F7 /* AppModel.xcdatamodel */,
+			);
+			currentVersion = 3EDEE4781AF276920092D6F7 /* AppModel.xcdatamodel */;
+			path = AppModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3EDEE41D1AF2388C0092D6F7 /* Project object */;
 }
