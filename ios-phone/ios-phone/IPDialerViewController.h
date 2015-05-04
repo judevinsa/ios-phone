@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPDialerViewController : UIViewController
+@interface IPDialerViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
