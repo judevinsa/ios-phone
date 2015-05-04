@@ -17,7 +17,7 @@
     ABAddressBookRef _addressBook;
     NSArray *  _contactList;
     NSMutableArray * _notMissedCalls;
-    NSMutableArray * _notMissedIndexPath;
+    NSMutableArray * _notMissedIndexPaths;
 }
 
 - (void)_initialization;
@@ -31,7 +31,7 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     self = [super init];
     if (self) {
         _notMissedCalls = [[NSMutableArray alloc] init];
-        _notMissedIndexPath = [[NSMutableArray alloc] init];
+        _notMissedIndexPaths = [[NSMutableArray alloc] init];
 
         // Method with contact API
         CFErrorRef abError;
@@ -74,9 +74,9 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
         cell.contactFirstNameLabel.textColor = [UIColor redColor];
         cell.contactLastNameLabel.textColor = [UIColor redColor];
         cell.dateLabel.textColor = [UIColor redColor];
-    } else {
+    } else if (![_notMissedCalls containsObject:_callList[indexPath.row]]) {
         [_notMissedCalls addObject:_callList[indexPath.row]];
-        [_notMissedIndexPath addObject:indexPath];
+        [_notMissedIndexPaths addObject:indexPath];
     }
 
     return cell;
@@ -91,7 +91,7 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
             [_callList insertObject:call atIndex:[[call valueForKey:@"index"] integerValue]];
         }
         [_callsTableView beginUpdates];
-        [_callsTableView reloadRowsAtIndexPaths:_notMissedIndexPath withRowAnimation:UITableViewRowAnimationFade];
+        [_callsTableView insertRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
         [_callsTableView endUpdates];
 
     } else if (_filterSegmentedControl.selectedSegmentIndex == 1) {
@@ -99,7 +99,7 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
             [_callList removeObjectAtIndex:[[call valueForKey:@"index"] integerValue]];
         }
         [_callsTableView beginUpdates];
-        [_callsTableView deleteRowsAtIndexPaths:_notMissedIndexPath withRowAnimation:UITableViewRowAnimationFade];
+        [_callsTableView deleteRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
         [_callsTableView endUpdates];
     }
 }
