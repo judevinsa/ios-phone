@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,20 +14,40 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W83-Z3-CrQ">
-                        <rect key="frame" x="42" y="11" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W83-Z3-CrQ" userLabel="contactFirstNameLabel">
+                        <rect key="frame" x="16" y="11" width="79" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCs-ix-rUw">
-                        <rect key="frame" x="230" y="11" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LastNameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCs-ix-rUw" userLabel="contactLastNameLabel">
+                        <rect key="frame" x="103" y="11" width="120" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1or-EY-4GW" userLabel="dateLabel">
+                        <rect key="frame" x="268" y="11" width="36" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="nCs-ix-rUw" firstAttribute="centerY" secondItem="W83-Z3-CrQ" secondAttribute="centerY" id="Dfr-G5-PwX"/>
+                    <constraint firstItem="nCs-ix-rUw" firstAttribute="leading" secondItem="W83-Z3-CrQ" secondAttribute="trailing" constant="8" id="EJg-7k-0Qc"/>
+                    <constraint firstItem="W83-Z3-CrQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="MxY-nn-8Xg"/>
+                    <constraint firstAttribute="centerY" secondItem="W83-Z3-CrQ" secondAttribute="centerY" id="QCg-MV-Y1L"/>
+                    <constraint firstItem="1or-EY-4GW" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="VaF-r5-cgl"/>
+                    <constraint firstItem="1or-EY-4GW" firstAttribute="centerY" secondItem="W83-Z3-CrQ" secondAttribute="centerY" id="uu7-Sh-JSb"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="contactFirstNameLabel" destination="W83-Z3-CrQ" id="9Fe-4i-KgE"/>
+                <outlet property="contactLastNameLabel" destination="nCs-ix-rUw" id="0Ln-Wm-f4d"/>
+                <outlet property="dateLabel" destination="1or-EY-4GW" id="Mse-45-nfC"/>
+            </connections>
+            <point key="canvasLocation" x="573" y="470"/>
         </tableViewCell>
     </objects>
 </document>

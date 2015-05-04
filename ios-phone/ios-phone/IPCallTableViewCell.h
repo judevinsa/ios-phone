@@ -10,4 +10,8 @@
 
 @interface IPCallTableViewCell : UITableViewCell
 
+
+@property (weak, nonatomic) IBOutlet UILabel * contactFirstNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel * contactLastNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel * dateLabel;
 @end
