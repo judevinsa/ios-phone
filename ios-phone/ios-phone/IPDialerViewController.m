@@ -7,6 +7,7 @@
 //
 
 #import "IPDialerViewController.h"
+#import "IPNewContactViewController.h"
 
 @interface IPDialerViewController () {
     NSArray * buttonLabels;
@@ -61,6 +62,8 @@
             _dialerTextView.text = [_dialerTextView.text substringToIndex:(_dialerTextView.text.length - 1)];
         }
     } else if ([[[sender titleLabel] text] isEqualToString:@"+"]) {
+        IPNewContactViewController * newContactViewController = [[IPNewContactViewController alloc] init];
+        [self presentViewController:newContactViewController animated:YES completion:nil];
 
     } else if ([[[sender titleLabel] text] isEqualToString:@"Call"]) {
 
