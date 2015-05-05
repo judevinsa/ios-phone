@@ -44,11 +44,28 @@
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     button.layer.borderWidth = 1.0f;
     button.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    button.layer.cornerRadius = 25.0f;
+    button.layer.cornerRadius = 30.0f;
     [cell.contentView addSubview:button];
-    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[button(50)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
-    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button(50)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
+    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[button(60)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
+    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button(60)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
+    [button addTarget:self action:@selector(updateTextViewWithPressedButton:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
+
+#pragma mark - Action Handlers
+
+- (void)updateTextViewWithPressedButton:(id)sender {
+    if ([[[sender titleLabel] text] isEqualToString:@"<-"]){
+        if (_dialerTextView.text.length > 0) {
+            _dialerTextView.text = [_dialerTextView.text substringToIndex:(_dialerTextView.text.length - 1)];
+        }
+    } else if ([[[sender titleLabel] text] isEqualToString:@"+"]) {
+
+    } else if ([[[sender titleLabel] text] isEqualToString:@"Call"]) {
+
+    } else {
+        _dialerTextView.text = [_dialerTextView.text stringByAppendingString:[[sender titleLabel] text]];
+    }
+}
 @end

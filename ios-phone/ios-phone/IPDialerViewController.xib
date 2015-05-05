@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPDialerViewController">
             <connections>
                 <outlet property="dialerCollectionView" destination="V87-Ze-KVw" id="zDg-oy-jlh"/>
+                <outlet property="dialerTextView" destination="qQA-gU-Gmo" id="BMx-7z-WUu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,25 +17,38 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="V87-Ze-KVw" userLabel="dialerCollectionView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="100" width="600" height="500"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="YuU-Hb-jp2">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="itemSize" width="60" height="60"/>
+                        <size key="headerReferenceSize" width="600" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="80" minY="40" maxX="80" maxY="40"/>
+                        <inset key="sectionInset" minX="60" minY="40" maxX="60" maxY="40"/>
                     </collectionViewFlowLayout>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="H0Y-5n-Yh4"/>
                         <outlet property="delegate" destination="-1" id="0N5-IS-kpf"/>
                     </connections>
                 </collectionView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qQA-gU-Gmo" userLabel="dialerTextView">
+                    <rect key="frame" x="0.0" y="60" width="600" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="mwZ-3r-GLx"/>
+                    </constraints>
+                    <color key="textColor" red="0.61057844065656564" green="0.61057844065656564" blue="0.61057844065656564" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="qQA-gU-Gmo" secondAttribute="trailing" id="6Ce-K8-ZLT"/>
+                <constraint firstItem="V87-Ze-KVw" firstAttribute="top" secondItem="qQA-gU-Gmo" secondAttribute="bottom" id="NAi-9T-wyn"/>
+                <constraint firstItem="qQA-gU-Gmo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="OdJ-pT-3Nn"/>
                 <constraint firstAttribute="trailing" secondItem="V87-Ze-KVw" secondAttribute="trailing" id="UHd-Rf-qwO"/>
                 <constraint firstItem="V87-Ze-KVw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VJv-94-88g"/>
-                <constraint firstItem="V87-Ze-KVw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gId-gc-Fmn"/>
                 <constraint firstAttribute="bottom" secondItem="V87-Ze-KVw" secondAttribute="bottom" id="lOT-Hn-wni"/>
+                <constraint firstItem="qQA-gU-Gmo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lRs-u8-gjQ"/>
             </constraints>
         </view>
     </objects>
