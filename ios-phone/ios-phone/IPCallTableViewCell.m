@@ -26,6 +26,10 @@
         _contactFirstNameLabel.textColor = [UIColor redColor];
         _contactLastNameLabel.textColor = [UIColor redColor];
         _dateLabel.textColor = [UIColor redColor];
+    } else {
+        _contactFirstNameLabel.textColor = [UIColor blackColor];
+        _contactLastNameLabel.textColor = [UIColor blackColor];
+        _dateLabel.textColor = [UIColor blackColor];
     }
 }
 

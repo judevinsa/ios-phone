@@ -21,6 +21,7 @@
 }
 
 - (void)_initialization;
+- (void)_updateIndexes;
 - (void)_updateNotMissedCalls;
 @end
 
@@ -73,13 +74,15 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     _filterSegmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
     _filterSegmentedControl.selectedSegmentIndex = 0;
     [_filterSegmentedControl addTarget:self action:@selector(segmentedControlSwitched:) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 30.0f)];
+    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 40.0f)];
     [self.navigationItem.titleView addSubview:_filterSegmentedControl];
 
     [self.navigationItem.titleView addConstraint:[NSLayoutConstraint constraintWithItem:_filterSegmentedControl attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.navigationItem.titleView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
     [self.navigationItem.titleView addConstraint:[NSLayoutConstraint constraintWithItem:_filterSegmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.navigationItem.titleView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
     [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_filterSegmentedControl(150)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
-    [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_filterSegmentedControl(30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
+    [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_filterSegmentedControl(25)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
+
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self _updateNotMissedCalls];
 }
 
@@ -111,20 +114,34 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_callList removeObjectAtIndex:indexPath.row];
+        [self _updateNotMissedCalls];
+        [_callsTableView beginUpdates];
+        [_callsTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+        [_callsTableView endUpdates];
+    }
+}
+
 
 #pragma mark - Action Handlers
 
 - (void)segmentedControlSwitched:(id)sender {
     if (_filterSegmentedControl.selectedSegmentIndex ==  0) {
-        for (NSDictionary * call in _notMissedCalls) {
-            [_callList insertObject:call atIndex:[[call valueForKey:@"index"] integerValue]];
+        for (NSDictionary * callAndIndexPath in _notMissedCalls) {
+            [_callList insertObject:[callAndIndexPath valueForKey:@"call"] atIndex:[[callAndIndexPath valueForKey:@"indexPath"] row]];
         }
         [_callsTableView beginUpdates];
         [_callsTableView insertRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
         [_callsTableView endUpdates];
     } else if (_filterSegmentedControl.selectedSegmentIndex == 1) {
-        for (NSDictionary * call in _notMissedCalls) {
-            [_callList removeObjectAtIndex:[[call valueForKey:@"index"] integerValue]];
+        for (NSDictionary * callAndIndexPath in _notMissedCalls) {
+            [_callList removeObjectAtIndex:[[callAndIndexPath valueForKey:@"indexPath"] row]];
         }
         [_callsTableView beginUpdates];
         [_callsTableView deleteRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
@@ -132,15 +149,24 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     }
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    if (_callList.count || !editing) {
+        [super setEditing:editing animated:animated];
+        [_callsTableView setEditing:editing animated:YES];
+    }
+}
+
 #pragma mark - Private Methods
+
 
 - (void)_updateNotMissedCalls {
     [_notMissedCalls removeAllObjects];
     [_notMissedIndexPaths removeAllObjects];
-    for (NSDictionary * call in _callList) {
-        if (![[call valueForKey:@"missed"] boolValue]) {
-            [_notMissedCalls addObject:call];
-            [_notMissedIndexPaths addObject:[NSIndexPath indexPathForRow:[[call valueForKey:@"index"] integerValue] inSection:0]];
+    for (NSInteger i = 0; i < _callList.count; i++) {
+        if (![[_callList[i] valueForKey:@"missed"] boolValue]) {
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [_notMissedCalls addObject:@{@"call": _callList[i], @"indexPath":indexPath}];
+            [_notMissedIndexPaths addObject:indexPath];
         }
     }
 }
