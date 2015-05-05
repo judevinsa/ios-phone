@@ -30,7 +30,6 @@ static NSString * sCellIdentifier = @"collectionID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dialerCollectionView.backgroundColor = [UIColor whiteColor];
-    // TODO: use static nsstring
     [_dialerCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:sCellIdentifier];
 }
 
