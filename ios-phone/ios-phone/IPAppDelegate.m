@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Julien Rollet. All rights reserved.
 //
 #import <CoreData/CoreData.h>
+#import <AddressBook/AddressBook.h>
 
 #import "IPAppDelegate.h"
 #import "IPFavoritesTableViewController.h"
@@ -26,6 +27,31 @@
 #pragma mark - AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    // We first try to grant access to the address book
+    CFErrorRef abError;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &abError);
+
+    __block BOOL accessGranted = NO;
+
+    if (ABAddressBookRequestAccessWithCompletion != NULL) { // we're on iOS 6
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            accessGranted = granted;
+            dispatch_semaphore_signal(sema);
+        });
+
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
+    else { // we're on iOS 5 or older
+        accessGranted = YES;
+    }
+
+    if (!accessGranted) {
+        return NO;
+    }
+
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // We first define the tabBarController

@@ -34,28 +34,9 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
         _notMissedCalls = [[NSMutableArray alloc] init];
         _notMissedIndexPaths = [[NSMutableArray alloc] init];
 
-        // TODO: Refactor in app delegate
-
         // Method with contact API
         CFErrorRef abError;
         _addressBook = ABAddressBookCreateWithOptions(NULL, &abError);
-
-        __block BOOL accessGranted = NO;
-
-        if (ABAddressBookRequestAccessWithCompletion != NULL) { // we're on iOS 6
-            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-            ABAddressBookRequestAccessWithCompletion(_addressBook, ^(bool granted, CFErrorRef error) {
-                accessGranted = granted;
-                dispatch_semaphore_signal(sema);
-            });
-
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        }
-        else { // we're on iOS 5 or older
-            accessGranted = YES;
-        }
-
         _contactList = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(_addressBook, NULL, kABPersonLastNameProperty);
         [self _initialization];
         [self _updateNotMissedCalls];
@@ -65,10 +46,23 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Calls";
     [_callsTableView setContentOffset:CGPointMake(_callsTableView.contentOffset.x, _callsTableView.contentOffset.y - 62.0f)];
     [_callsTableView registerNib:[UINib nibWithNibName:@"IPCallTableViewCell" bundle:nil] forCellReuseIdentifier:sCellIdentifier];
+    NSArray * filterItems = [NSArray arrayWithObjects:@"All", @"Missed", nil];
+
+    _filterSegmentedControl = [[UISegmentedControl alloc] initWithItems:filterItems];
+    _filterSegmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+    _filterSegmentedControl.selectedSegmentIndex = 0;
     [_filterSegmentedControl addTarget:self action:@selector(segmentedControlSwitched:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 40.0f)];
+    [self.navigationItem.titleView addSubview:_filterSegmentedControl];
+
+    [self.navigationItem.titleView addConstraint:[NSLayoutConstraint constraintWithItem:_filterSegmentedControl attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.navigationItem.titleView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+    [self.navigationItem.titleView addConstraint:[NSLayoutConstraint constraintWithItem:_filterSegmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.navigationItem.titleView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
+    [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_filterSegmentedControl(150)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
+    [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_filterSegmentedControl(25)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
+
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self _updateNotMissedCalls];
 }
 
@@ -97,13 +91,21 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     cell.contactLastNameLabel.text = (__bridge NSString *)ABRecordCopyValue(contact, kABPersonLastNameProperty);
     cell.dateLabel.text = [_callList[indexPath.row] valueForKey:@"date"];
     cell.isMissedCall = isMissedCall;
-
-//    else if (![_notMissedCalls containsObject:_callList[indexPath.row]]
-//               ) {
-//        [_notMissedCalls addObject:_callList[indexPath.row]];
-//        [_notMissedIndexPaths addObject:indexPath];
-//    }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_callList removeObjectAtIndex:indexPath.row];
+        [self _updateNotMissedCalls];
+        [_callsTableView beginUpdates];
+        [_callsTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+        [_callsTableView endUpdates];
+    }
 }
 
 
@@ -111,15 +113,15 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 
 - (void)segmentedControlSwitched:(id)sender {
     if (_filterSegmentedControl.selectedSegmentIndex ==  0) {
-        for (NSDictionary * call in _notMissedCalls) {
-            [_callList insertObject:call atIndex:[[call valueForKey:@"index"] integerValue]];
+        for (NSDictionary * callAndIndexPath in _notMissedCalls) {
+            [_callList insertObject:[callAndIndexPath valueForKey:@"call"] atIndex:[[callAndIndexPath valueForKey:@"indexPath"] row]];
         }
         [_callsTableView beginUpdates];
         [_callsTableView insertRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
         [_callsTableView endUpdates];
     } else if (_filterSegmentedControl.selectedSegmentIndex == 1) {
-        for (NSDictionary * call in _notMissedCalls) {
-            [_callList removeObjectAtIndex:[[call valueForKey:@"index"] integerValue]];
+        for (NSDictionary * callAndIndexPath in _notMissedCalls) {
+            [_callList removeObjectAtIndex:[[callAndIndexPath valueForKey:@"indexPath"] row]];
         }
         [_callsTableView beginUpdates];
         [_callsTableView deleteRowsAtIndexPaths:_notMissedIndexPaths withRowAnimation:UITableViewRowAnimationFade];
@@ -127,25 +129,34 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     }
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    if (_callList.count || !editing) {
+        [super setEditing:editing animated:animated];
+        [_callsTableView setEditing:editing animated:YES];
+    }
+}
+
 #pragma mark - Private Methods
+
 
 - (void)_updateNotMissedCalls {
     [_notMissedCalls removeAllObjects];
     [_notMissedIndexPaths removeAllObjects];
-    for (NSDictionary * call in _callList) {
-        if (![[call valueForKey:@"missed"] boolValue]) {
-            [_notMissedCalls addObject:call];
-            [_notMissedIndexPaths addObject:[NSIndexPath indexPathForRow:[[call valueForKey:@"index"] integerValue] inSection:0]];
+    for (NSInteger i = 0; i < _callList.count; i++) {
+        if (![[_callList[i] valueForKey:@"missed"] boolValue]) {
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [_notMissedCalls addObject:@{@"call": _callList[i], @"indexPath":indexPath}];
+            [_notMissedIndexPaths addObject:indexPath];
         }
     }
 }
 
 - (void)_initialization {
     _callList = [[NSMutableArray alloc] initWithObjects:
-                 @{@"index": @0, @"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1222334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
-                 @{@"index": @1, @"contact": _contactList[2], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:12334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
-                 @{@"index": @2, @"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1255334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:NO]},
-                 @{@"index": @3, @"contact": _contactList[3], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:32334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
+                 @{@"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1222334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
+                 @{@"contact": _contactList[2], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:12334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
+                 @{@"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1255334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:NO]},
+                 @{@"contact": _contactList[3], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:32334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
                  nil];
     return;
 }
