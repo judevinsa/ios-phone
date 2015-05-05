@@ -8,11 +8,8 @@
 #import <CoreData/CoreData.h>
 
 #import "IPAppDelegate.h"
-#import "IPFavoritesNavigationController.h"
 #import "IPFavoritesTableViewController.h"
-#import "IPCallsNavigationController.h"
 #import "IPCallsTableViewController.h"
-#import "IPContactsNavigationController.h"
 #import "IPContactsTableViewController.h"
 #import "IPDialerViewController.h"
 
@@ -36,15 +33,15 @@
 
     // Then the views relative to the first tab
     IPFavoritesTableViewController * favoritesTableViewController = [[IPFavoritesTableViewController alloc] init];
-    IPFavoritesNavigationController * favoritesNavigationController = [[IPFavoritesNavigationController alloc] initWithRootViewController:favoritesTableViewController];
+    UINavigationController * favoritesNavigationController = [[UINavigationController alloc] initWithRootViewController:favoritesTableViewController];
 
     // Then the views relative to the second tab
     IPCallsTableViewController * callsTableViewController = [[IPCallsTableViewController alloc] init];
-    IPCallsNavigationController * callsNavigationController = [[IPCallsNavigationController alloc] initWithRootViewController:callsTableViewController];
+    UINavigationController * callsNavigationController = [[UINavigationController alloc] initWithRootViewController:callsTableViewController];
 
     // Then the views relative to the third tab
     IPContactsTableViewController * contactsTableViewController = [[IPContactsTableViewController alloc] initWithManagedObjectContext:[self managedObjectContext]];
-    IPContactsNavigationController * contactsNavigationController = [[IPContactsNavigationController alloc] initWithRootViewController:contactsTableViewController];
+    UINavigationController * contactsNavigationController = [[UINavigationController alloc] initWithRootViewController:contactsTableViewController];
 
     // Then the views relative to the fourth tab
     IPDialerViewController * dialerViewController = [[IPDialerViewController alloc] init];
