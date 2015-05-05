@@ -65,10 +65,21 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Calls";
     [_callsTableView setContentOffset:CGPointMake(_callsTableView.contentOffset.x, _callsTableView.contentOffset.y - 62.0f)];
     [_callsTableView registerNib:[UINib nibWithNibName:@"IPCallTableViewCell" bundle:nil] forCellReuseIdentifier:sCellIdentifier];
+    NSArray * filterItems = [NSArray arrayWithObjects:@"All", @"Missed", nil];
+
+    _filterSegmentedControl = [[UISegmentedControl alloc] initWithItems:filterItems];
+    _filterSegmentedControl.translatesAutoresizingMaskIntoConstraints = NO;
+    _filterSegmentedControl.selectedSegmentIndex = 0;
     [_filterSegmentedControl addTarget:self action:@selector(segmentedControlSwitched:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 30.0f)];
+    [self.navigationItem.titleView addSubview:_filterSegmentedControl];
+
+    [self.navigationItem.titleView addConstraint:[NSLayoutConstraint constraintWithItem:_filterSegmentedControl attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.navigationItem.titleView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+    [self.navigationItem.titleView addConstraint:[NSLayoutConstraint constraintWithItem:_filterSegmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.navigationItem.titleView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
+    [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_filterSegmentedControl(150)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
+    [self.navigationItem.titleView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_filterSegmentedControl(30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_filterSegmentedControl)]];
     [self _updateNotMissedCalls];
 }
 
@@ -97,12 +108,6 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     cell.contactLastNameLabel.text = (__bridge NSString *)ABRecordCopyValue(contact, kABPersonLastNameProperty);
     cell.dateLabel.text = [_callList[indexPath.row] valueForKey:@"date"];
     cell.isMissedCall = isMissedCall;
-
-//    else if (![_notMissedCalls containsObject:_callList[indexPath.row]]
-//               ) {
-//        [_notMissedCalls addObject:_callList[indexPath.row]];
-//        [_notMissedIndexPaths addObject:indexPath];
-//    }
     return cell;
 }
 
