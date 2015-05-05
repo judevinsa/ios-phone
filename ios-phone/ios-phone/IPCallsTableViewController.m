@@ -21,6 +21,7 @@
 }
 
 - (void)_initialization;
+- (void)_updateNotMissedCalls;
 @end
 
 static NSString * sCellIdentifier = @"callsCellIdentifier";
@@ -32,6 +33,8 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     if (self) {
         _notMissedCalls = [[NSMutableArray alloc] init];
         _notMissedIndexPaths = [[NSMutableArray alloc] init];
+
+        // TODO: Refactor in app delegate
 
         // Method with contact API
         CFErrorRef abError;
@@ -55,6 +58,7 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 
         _contactList = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(_addressBook, NULL, kABPersonLastNameProperty);
         [self _initialization];
+        [self _updateNotMissedCalls];
     }
     return self;
 }
@@ -65,6 +69,7 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     [_callsTableView setContentOffset:CGPointMake(_callsTableView.contentOffset.x, _callsTableView.contentOffset.y - 62.0f)];
     [_callsTableView registerNib:[UINib nibWithNibName:@"IPCallTableViewCell" bundle:nil] forCellReuseIdentifier:sCellIdentifier];
     [_filterSegmentedControl addTarget:self action:@selector(segmentedControlSwitched:) forControlEvents:UIControlEventValueChanged];
+    [self _updateNotMissedCalls];
 }
 
 #pragma mark - UITableViewDelegate
@@ -91,16 +96,13 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     cell.contactFirstNameLabel.text = (__bridge NSString *)ABRecordCopyValue(contact, kABPersonFirstNameProperty);
     cell.contactLastNameLabel.text = (__bridge NSString *)ABRecordCopyValue(contact, kABPersonLastNameProperty);
     cell.dateLabel.text = [_callList[indexPath.row] valueForKey:@"date"];
+    cell.isMissedCall = isMissedCall;
 
-    if (isMissedCall) {
-        cell.contactFirstNameLabel.textColor = [UIColor redColor];
-        cell.contactLastNameLabel.textColor = [UIColor redColor];
-        cell.dateLabel.textColor = [UIColor redColor];
-    } else if (![_notMissedCalls containsObject:_callList[indexPath.row]]
-               ) {
-        [_notMissedCalls addObject:_callList[indexPath.row]];
-        [_notMissedIndexPaths addObject:indexPath];
-    }
+//    else if (![_notMissedCalls containsObject:_callList[indexPath.row]]
+//               ) {
+//        [_notMissedCalls addObject:_callList[indexPath.row]];
+//        [_notMissedIndexPaths addObject:indexPath];
+//    }
     return cell;
 }
 
@@ -125,7 +127,18 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
     }
 }
 
-#pragma mark - Test
+#pragma mark - Private Methods
+
+- (void)_updateNotMissedCalls {
+    [_notMissedCalls removeAllObjects];
+    [_notMissedIndexPaths removeAllObjects];
+    for (NSDictionary * call in _callList) {
+        if (![[call valueForKey:@"missed"] boolValue]) {
+            [_notMissedCalls addObject:call];
+            [_notMissedIndexPaths addObject:[NSIndexPath indexPathForRow:[[call valueForKey:@"index"] integerValue] inSection:0]];
+        }
+    }
+}
 
 - (void)_initialization {
     _callList = [[NSMutableArray alloc] initWithObjects:

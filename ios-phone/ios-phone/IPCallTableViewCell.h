@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UILabel * contactFirstNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel * contactLastNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel * dateLabel;
+@property (nonatomic) BOOL isMissedCall;
 @end

@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="addButton" destination="Y4y-VQ-ivX" id="2XX-AC-VVl"/>
                 <outlet property="cancelButton" destination="rre-u2-XsK" id="up4-wL-D3v"/>
+                <outlet property="phoneTextField" destination="aia-hX-j6g" id="Roc-Fy-zSK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,31 +46,49 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4y-VQ-ivX">
-                    <rect key="frame" x="285" y="306" width="30" height="30"/>
+                    <rect key="frame" x="285" y="378" width="30" height="30"/>
                     <state key="normal" title="Add">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rre-u2-XsK">
-                    <rect key="frame" x="276" y="366" width="48" height="30"/>
+                    <rect key="frame" x="276" y="438" width="48" height="30"/>
                     <state key="normal" title="Cancel">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EO0-pd-fTy">
+                    <rect key="frame" x="178" y="312" width="50" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aia-hX-j6g" userLabel="phoneTextField">
+                    <rect key="frame" x="292" y="308" width="150" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="AeC-wh-Fp1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="rre-u2-XsK" secondAttribute="centerX" id="2ZS-dk-4oc"/>
                 <constraint firstItem="rre-u2-XsK" firstAttribute="top" secondItem="Y4y-VQ-ivX" secondAttribute="bottom" constant="30" id="2lt-9T-3cc"/>
-                <constraint firstItem="Y4y-VQ-ivX" firstAttribute="top" secondItem="K4R-QQ-eRB" secondAttribute="bottom" constant="30" id="5DS-c4-AV7"/>
+                <constraint firstItem="INt-cW-BaI" firstAttribute="leading" secondItem="aia-hX-j6g" secondAttribute="leading" id="37U-5S-wqI"/>
                 <constraint firstItem="RVP-gf-bz4" firstAttribute="leading" secondItem="b7a-KG-KD5" secondAttribute="leading" id="7e1-x8-uEX"/>
                 <constraint firstAttribute="centerX" secondItem="Y4y-VQ-ivX" secondAttribute="centerX" id="CBq-ZW-oIU"/>
                 <constraint firstItem="b7a-KG-KD5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-80" id="Fly-P9-xPd"/>
                 <constraint firstItem="K4R-QQ-eRB" firstAttribute="leading" secondItem="INt-cW-BaI" secondAttribute="leading" id="Npg-Mh-bla"/>
                 <constraint firstItem="INt-cW-BaI" firstAttribute="leading" secondItem="b7a-KG-KD5" secondAttribute="trailing" constant="30" id="QK6-EN-evs"/>
                 <constraint firstItem="RVP-gf-bz4" firstAttribute="top" secondItem="b7a-KG-KD5" secondAttribute="bottom" constant="40" id="Zfp-Mt-bO2"/>
+                <constraint firstItem="aia-hX-j6g" firstAttribute="centerY" secondItem="EO0-pd-fTy" secondAttribute="centerY" id="gD7-SC-8ku"/>
                 <constraint firstItem="b7a-KG-KD5" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-100" id="kUB-Jt-qNn"/>
+                <constraint firstItem="Y4y-VQ-ivX" firstAttribute="top" secondItem="aia-hX-j6g" secondAttribute="bottom" constant="40" id="mPW-Z1-7ws"/>
                 <constraint firstItem="b7a-KG-KD5" firstAttribute="centerY" secondItem="INt-cW-BaI" secondAttribute="centerY" id="r58-Rv-gE8"/>
+                <constraint firstItem="b7a-KG-KD5" firstAttribute="leading" secondItem="EO0-pd-fTy" secondAttribute="leading" id="u08-ZQ-INM"/>
+                <constraint firstItem="EO0-pd-fTy" firstAttribute="top" secondItem="RVP-gf-bz4" secondAttribute="bottom" constant="40" id="vIN-6k-mcb"/>
                 <constraint firstItem="RVP-gf-bz4" firstAttribute="centerY" secondItem="K4R-QQ-eRB" secondAttribute="centerY" id="y16-eJ-jJy"/>
             </constraints>
         </view>

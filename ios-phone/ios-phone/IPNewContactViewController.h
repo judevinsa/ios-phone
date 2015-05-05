@@ -12,4 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UIButton * addButton;
 @property (weak, nonatomic) IBOutlet UIButton * cancelButton;
+@property (weak, nonatomic) IBOutlet UITextField * phoneTextField;
 @end

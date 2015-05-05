@@ -20,4 +20,13 @@
     _dateLabel.text = @"";
 }
 
+- (void)setIsMissedCall:(BOOL)isMissedCall {
+    _isMissedCall = isMissedCall;
+    if (isMissedCall) {
+        _contactFirstNameLabel.textColor = [UIColor redColor];
+        _contactLastNameLabel.textColor = [UIColor redColor];
+        _dateLabel.textColor = [UIColor redColor];
+    }
+}
+
 @end

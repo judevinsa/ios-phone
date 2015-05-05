@@ -10,17 +10,19 @@
 #import "IPNewContactViewController.h"
 
 @interface IPDialerViewController () {
-    NSArray * buttonLabels;
+    NSArray * _buttonLabels;
 }
 
 @end
+
+static NSString * sCellIdentifier = @"collectionID";
 
 @implementation IPDialerViewController
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        buttonLabels = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#", @"+", @"Call", @"<-"];
+        _buttonLabels = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#", @"+", @"Call", @"<-"];
     }
     return self;
 }
@@ -28,20 +30,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dialerCollectionView.backgroundColor = [UIColor whiteColor];
-    [_dialerCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"collectionID"];
+    // TODO: use static nsstring
+    [_dialerCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:sCellIdentifier];
 }
 
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 15;
+    return _buttonLabels.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionID" forIndexPath:indexPath];
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
     UIButton * button = [[UIButton alloc] init];
     button.translatesAutoresizingMaskIntoConstraints = NO;
-    [button setTitle:buttonLabels[indexPath.row] forState:UIControlStateNormal];
+    [button setTitle:_buttonLabels[indexPath.row] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     button.layer.borderWidth = 1.0f;
     button.layer.borderColor = [[UIColor lightGrayColor] CGColor];
