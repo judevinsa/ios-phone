@@ -17,11 +17,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Add a contact";
-    // Do any additional setup after loading the view from its nib.
-    [_cancelButton addTarget:self action:@selector(cancelButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTouched:)]];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(confirmNewContact:)]];
 }
 
 #pragma mark - Action handlers
+
+- (void)confirmNewContact:(id)sender {
+
+}
 
 - (void)cancelButtonTouched:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

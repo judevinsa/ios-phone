@@ -94,7 +94,8 @@ static NSString * sCellIdentifier = @"contactsCellIdentifier";
 
 - (void)addAContact:(id)sender {
     IPNewContactViewController * newContactViewController = [[IPNewContactViewController alloc] init];
-    [self presentViewController:newContactViewController animated:YES completion:nil];
+    UINavigationController * newContactNavigationController = [[UINavigationController alloc] initWithRootViewController:newContactViewController];
+    [self presentViewController:newContactNavigationController animated:YES completion:nil];
 }
 
 @end

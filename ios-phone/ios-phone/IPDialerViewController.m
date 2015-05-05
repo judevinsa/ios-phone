@@ -66,7 +66,8 @@ static NSString * sCellIdentifier = @"collectionID";
         }
     } else if ([[[sender titleLabel] text] isEqualToString:@"+"]) {
         IPNewContactViewController * newContactViewController = [[IPNewContactViewController alloc] init];
-        [self presentViewController:newContactViewController animated:YES completion:nil];
+        UINavigationController * newContactNavigationController = [[UINavigationController alloc] initWithRootViewController:newContactViewController];
+        [self presentViewController:newContactNavigationController animated:YES completion:nil];
 
     } else if ([[[sender titleLabel] text] isEqualToString:@"Call"]) {
 
