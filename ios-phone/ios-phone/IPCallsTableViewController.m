@@ -21,7 +21,6 @@
 }
 
 - (void)_initialization;
-- (void)_updateIndexes;
 - (void)_updateNotMissedCalls;
 @end
 
@@ -35,28 +34,9 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
         _notMissedCalls = [[NSMutableArray alloc] init];
         _notMissedIndexPaths = [[NSMutableArray alloc] init];
 
-        // TODO: Refactor in app delegate
-
         // Method with contact API
         CFErrorRef abError;
         _addressBook = ABAddressBookCreateWithOptions(NULL, &abError);
-
-        __block BOOL accessGranted = NO;
-
-        if (ABAddressBookRequestAccessWithCompletion != NULL) { // we're on iOS 6
-            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-
-            ABAddressBookRequestAccessWithCompletion(_addressBook, ^(bool granted, CFErrorRef error) {
-                accessGranted = granted;
-                dispatch_semaphore_signal(sema);
-            });
-
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        }
-        else { // we're on iOS 5 or older
-            accessGranted = YES;
-        }
-
         _contactList = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(_addressBook, NULL, kABPersonLastNameProperty);
         [self _initialization];
         [self _updateNotMissedCalls];
@@ -173,10 +153,10 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 
 - (void)_initialization {
     _callList = [[NSMutableArray alloc] initWithObjects:
-                 @{@"index": @0, @"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1222334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
-                 @{@"index": @1, @"contact": _contactList[2], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:12334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
-                 @{@"index": @2, @"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1255334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:NO]},
-                 @{@"index": @3, @"contact": _contactList[3], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:32334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
+                 @{@"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1222334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
+                 @{@"contact": _contactList[2], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:12334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
+                 @{@"contact": _contactList[1], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:1255334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:NO]},
+                 @{@"contact": _contactList[3], @"date": [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:32334.0f] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterMediumStyle], @"missed": [NSNumber numberWithBool:YES]},
                  nil];
     return;
 }
