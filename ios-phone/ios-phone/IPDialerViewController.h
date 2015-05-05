@@ -10,4 +10,6 @@
 
 @interface IPDialerViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UICollectionView * dialerCollectionView;
+@property (weak, nonatomic) IBOutlet UITextView * dialerTextView;
 @end
