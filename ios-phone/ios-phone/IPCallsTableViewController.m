@@ -45,6 +45,7 @@ static NSString * sCellIdentifier = @"callsCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Calls";
+    [_callsTableView setContentOffset:CGPointMake(_callsTableView.contentOffset.x, _callsTableView.contentOffset.y - 62.0f)];
     [_callsTableView registerNib:[UINib nibWithNibName:@"IPCallTableViewCell" bundle:nil] forCellReuseIdentifier:sCellIdentifier];
     [_filterSegmentedControl addTarget:self action:@selector(segmentedControlSwitched:) forControlEvents:UIControlEventValueChanged];
 }

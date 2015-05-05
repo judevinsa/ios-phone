@@ -16,57 +16,33 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bcm-aX-dez">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F1l-aW-2HV" userLabel="containerView">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tMf-HD-97s" userLabel="allMissedSegmentedControl">
-                                    <rect key="frame" x="225" y="8" width="150" height="29"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="150" id="3bR-ga-m9R"/>
-                                    </constraints>
-                                    <segments>
-                                        <segment title="All"/>
-                                        <segment title="Missed"/>
-                                    </segments>
-                                </segmentedControl>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="drq-W6-aQR" userLabel="callsTableView">
-                                    <rect key="frame" x="0.0" y="44" width="600" height="513"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="qVg-on-UmK"/>
-                                        <outlet property="delegate" destination="-1" id="cbO-Rg-xN8"/>
-                                    </connections>
-                                </tableView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="drq-W6-aQR" firstAttribute="leading" secondItem="F1l-aW-2HV" secondAttribute="leading" id="2Kn-yK-yrb"/>
-                                <constraint firstAttribute="trailing" secondItem="drq-W6-aQR" secondAttribute="trailing" id="Gxv-vf-nzJ"/>
-                                <constraint firstItem="tMf-HD-97s" firstAttribute="top" secondItem="F1l-aW-2HV" secondAttribute="top" constant="8" id="ToD-hn-FOB"/>
-                                <constraint firstItem="drq-W6-aQR" firstAttribute="top" secondItem="tMf-HD-97s" secondAttribute="bottom" constant="8" id="iFQ-dQ-hex"/>
-                                <constraint firstAttribute="centerX" secondItem="tMf-HD-97s" secondAttribute="centerX" id="j9H-VL-S9B"/>
-                                <constraint firstAttribute="bottom" secondItem="drq-W6-aQR" secondAttribute="bottom" constant="20" id="njF-K1-qKt"/>
-                            </constraints>
-                        </view>
-                    </subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tMf-HD-97s" userLabel="allMissedSegmentedControl">
+                    <rect key="frame" x="225" y="78" width="150" height="29"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="F1l-aW-2HV" secondAttribute="bottom" id="EAO-C4-wsi"/>
-                        <constraint firstItem="F1l-aW-2HV" firstAttribute="top" secondItem="Bcm-aX-dez" secondAttribute="top" id="EvW-8P-0cE"/>
-                        <constraint firstAttribute="width" secondItem="drq-W6-aQR" secondAttribute="width" id="OIR-h7-blO"/>
-                        <constraint firstAttribute="trailing" secondItem="F1l-aW-2HV" secondAttribute="trailing" id="i7a-rA-nZH"/>
-                        <constraint firstItem="F1l-aW-2HV" firstAttribute="leading" secondItem="Bcm-aX-dez" secondAttribute="leading" id="uhn-lA-Mwy"/>
+                        <constraint firstAttribute="width" constant="150" id="3bR-ga-m9R"/>
                     </constraints>
-                </scrollView>
+                    <segments>
+                        <segment title="All"/>
+                        <segment title="Missed"/>
+                    </segments>
+                </segmentedControl>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="drq-W6-aQR" userLabel="callsTableView">
+                    <rect key="frame" x="0.0" y="114" width="600" height="486"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="qVg-on-UmK"/>
+                        <outlet property="delegate" destination="-1" id="cbO-Rg-xN8"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Bcm-aX-dez" secondAttribute="trailing" id="VVN-mj-Fga"/>
-                <constraint firstItem="Bcm-aX-dez" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="giC-gS-yzC"/>
-                <constraint firstItem="Bcm-aX-dez" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kzB-KK-oOl"/>
-                <constraint firstAttribute="bottom" secondItem="Bcm-aX-dez" secondAttribute="bottom" id="muf-hy-bKE"/>
+                <constraint firstAttribute="trailing" secondItem="drq-W6-aQR" secondAttribute="trailing" id="C0Z-Je-yUq"/>
+                <constraint firstItem="drq-W6-aQR" firstAttribute="top" secondItem="tMf-HD-97s" secondAttribute="bottom" constant="8" id="SVC-CO-EnQ"/>
+                <constraint firstItem="drq-W6-aQR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="him-FT-G0G"/>
+                <constraint firstItem="tMf-HD-97s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="78" id="jJc-L8-hLZ"/>
+                <constraint firstAttribute="centerX" secondItem="tMf-HD-97s" secondAttribute="centerX" id="o8P-pB-E0b"/>
+                <constraint firstAttribute="bottom" secondItem="drq-W6-aQR" secondAttribute="bottom" id="rz0-ef-82Q"/>
             </constraints>
         </view>
     </objects>
