@@ -2,10 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPDialerViewController">
             <connections>
+                <outlet property="addContactButton" destination="V0S-O0-TFH" id="I3I-4f-7Ai"/>
+                <outlet property="callButton" destination="lmg-Fg-nhe" id="RWI-3M-Uij"/>
+                <outlet property="deleteButton" destination="x80-7v-XXB" id="Cqv-Ps-lAM"/>
                 <outlet property="dialerCollectionView" destination="V87-Ze-KVw" id="zDg-oy-jlh"/>
                 <outlet property="dialerTextView" destination="qQA-gU-Gmo" id="BMx-7z-WUu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -16,21 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="V87-Ze-KVw" userLabel="dialerCollectionView">
-                    <rect key="frame" x="0.0" y="100" width="600" height="500"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="YuU-Hb-jp2">
-                        <size key="itemSize" width="60" height="60"/>
-                        <size key="headerReferenceSize" width="600" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="60" minY="40" maxX="60" maxY="40"/>
-                    </collectionViewFlowLayout>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="H0Y-5n-Yh4"/>
-                        <outlet property="delegate" destination="-1" id="0N5-IS-kpf"/>
-                    </connections>
-                </collectionView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qQA-gU-Gmo" userLabel="dialerTextView">
-                    <rect key="frame" x="0.0" y="60" width="600" height="40"/>
+                    <rect key="frame" x="70" y="48" width="461" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="mwZ-3r-GLx"/>
@@ -39,16 +30,66 @@
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x80-7v-XXB" userLabel="deleteButton">
+                    <rect key="frame" x="550" y="53" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="6JX-7i-2mC"/>
+                    </constraints>
+                    <state key="normal" title="&lt;-">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmg-Fg-nhe" userLabel="callButton">
+                    <rect key="frame" x="285" y="480" width="30" height="30"/>
+                    <color key="backgroundColor" red="0.30949653318293158" green="0.79375789141414144" blue="0.38792321367681531" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="Cs7-v2-T6d"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="60" id="vJG-yX-1Wf"/>
+                    </constraints>
+                    <state key="normal" title="Call">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0S-O0-TFH" userLabel="newContactButton">
+                    <rect key="frame" x="20" y="53" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="Xet-z4-Xf0"/>
+                    </constraints>
+                    <state key="normal" title="+">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="V87-Ze-KVw" userLabel="dialerCollectionView">
+                    <rect key="frame" x="0.0" y="96" width="600" height="364"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="YuU-Hb-jp2">
+                        <size key="itemSize" width="60" height="60"/>
+                        <size key="headerReferenceSize" width="600" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="H0Y-5n-Yh4"/>
+                        <outlet property="delegate" destination="-1" id="0N5-IS-kpf"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="qQA-gU-Gmo" secondAttribute="trailing" id="6Ce-K8-ZLT"/>
-                <constraint firstItem="V87-Ze-KVw" firstAttribute="top" secondItem="qQA-gU-Gmo" secondAttribute="bottom" id="NAi-9T-wyn"/>
-                <constraint firstItem="qQA-gU-Gmo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="OdJ-pT-3Nn"/>
+                <constraint firstItem="lmg-Fg-nhe" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" multiplier="0.85" id="DzQ-vn-8VM"/>
+                <constraint firstItem="qQA-gU-Gmo" firstAttribute="leading" secondItem="V0S-O0-TFH" secondAttribute="trailing" constant="20" id="IcY-wH-Kez"/>
+                <constraint firstItem="qQA-gU-Gmo" firstAttribute="centerY" secondItem="x80-7v-XXB" secondAttribute="centerY" id="JEN-Gs-3KV"/>
+                <constraint firstItem="V87-Ze-KVw" firstAttribute="top" secondItem="qQA-gU-Gmo" secondAttribute="bottom" constant="8" id="NAi-9T-wyn"/>
+                <constraint firstItem="qQA-gU-Gmo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" multiplier="0.08" id="OdJ-pT-3Nn"/>
+                <constraint firstAttribute="trailing" secondItem="x80-7v-XXB" secondAttribute="trailing" constant="20" id="Pq7-ac-iG6"/>
+                <constraint firstItem="V0S-O0-TFH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Se6-p2-mfq"/>
                 <constraint firstAttribute="trailing" secondItem="V87-Ze-KVw" secondAttribute="trailing" id="UHd-Rf-qwO"/>
                 <constraint firstItem="V87-Ze-KVw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VJv-94-88g"/>
-                <constraint firstAttribute="bottom" secondItem="V87-Ze-KVw" secondAttribute="bottom" id="lOT-Hn-wni"/>
-                <constraint firstItem="qQA-gU-Gmo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lRs-u8-gjQ"/>
+                <constraint firstAttribute="centerX" secondItem="qQA-gU-Gmo" secondAttribute="centerX" id="VzQ-OZ-jgt"/>
+                <constraint firstAttribute="centerX" secondItem="lmg-Fg-nhe" secondAttribute="centerX" id="hcF-wY-W99"/>
+                <constraint firstItem="V0S-O0-TFH" firstAttribute="centerY" secondItem="qQA-gU-Gmo" secondAttribute="centerY" id="jFg-2P-C2P"/>
+                <constraint firstItem="x80-7v-XXB" firstAttribute="leading" relation="lessThanOrEqual" secondItem="qQA-gU-Gmo" secondAttribute="trailing" constant="20" id="jyk-w3-Sr5"/>
+                <constraint firstItem="lmg-Fg-nhe" firstAttribute="top" secondItem="V87-Ze-KVw" secondAttribute="bottom" constant="20" id="l8t-Kp-W9D"/>
             </constraints>
         </view>
     </objects>

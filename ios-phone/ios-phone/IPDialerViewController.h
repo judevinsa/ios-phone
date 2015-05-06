@@ -10,6 +10,9 @@
 
 @interface IPDialerViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIButton * addContactButton;
+@property (weak, nonatomic) IBOutlet UIButton * deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton * callButton;
 @property (weak, nonatomic) IBOutlet UICollectionView * dialerCollectionView;
 @property (weak, nonatomic) IBOutlet UITextView * dialerTextView;
 @end
