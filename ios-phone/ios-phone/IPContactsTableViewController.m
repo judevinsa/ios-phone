@@ -59,6 +59,14 @@ static NSString * sCellIdentifier = @"contactsCellIdentifier";
     [_contactsTableView registerNib:[UINib nibWithNibName:@"IPContactsTableViewCell" bundle:nil] forCellReuseIdentifier:sCellIdentifier];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    CFErrorRef abError;
+    _addressBook = ABAddressBookCreateWithOptions(NULL, &abError);
+    _contactList = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(_addressBook, NULL, kABPersonLastNameProperty);
+    [_contactsTableView reloadData];
+}
+
 
 
 #pragma mark - UITableViewDelegate

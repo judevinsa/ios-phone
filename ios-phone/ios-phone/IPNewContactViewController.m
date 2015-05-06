@@ -51,6 +51,7 @@
             CFStringRef stringOfError = CFErrorCopyDescription(error);
             NSLog(@"Contact not saved : error %@", stringOfError);
         }
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 
 }
