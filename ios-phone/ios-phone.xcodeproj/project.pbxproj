@@ -11,6 +11,7 @@
 		3ED58D261AF76C0000A0ED37 /* IPNewContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58D241AF76C0000A0ED37 /* IPNewContactViewController.xib */; };
 		3ED58D2A1AF79E1C00A0ED37 /* IPCallTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED58D281AF79E1C00A0ED37 /* IPCallTableViewCell.m */; };
 		3ED58D2B1AF79E1C00A0ED37 /* IPCallTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED58D291AF79E1C00A0ED37 /* IPCallTableViewCell.xib */; };
+		3EDBCFB41AF9FFBE00C5B833 /* IPDialerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDBCFB31AF9FFBE00C5B833 /* IPDialerCollectionViewCell.m */; };
 		3EDEE42B1AF2388C0092D6F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE42A1AF2388C0092D6F7 /* main.m */; };
 		3EDEE42E1AF2388C0092D6F7 /* IPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE42D1AF2388C0092D6F7 /* IPAppDelegate.m */; };
 		3EDEE4361AF2388C0092D6F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EDEE4351AF2388C0092D6F7 /* Images.xcassets */; };
@@ -49,6 +50,8 @@
 		3ED58D271AF79E1C00A0ED37 /* IPCallTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCallTableViewCell.h; sourceTree = "<group>"; };
 		3ED58D281AF79E1C00A0ED37 /* IPCallTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCallTableViewCell.m; sourceTree = "<group>"; };
 		3ED58D291AF79E1C00A0ED37 /* IPCallTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCallTableViewCell.xib; sourceTree = "<group>"; };
+		3EDBCFB21AF9FFBE00C5B833 /* IPDialerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPDialerCollectionViewCell.h; sourceTree = "<group>"; };
+		3EDBCFB31AF9FFBE00C5B833 /* IPDialerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPDialerCollectionViewCell.m; sourceTree = "<group>"; };
 		3EDEE4251AF2388C0092D6F7 /* ios-phone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-phone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EDEE4291AF2388C0092D6F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EDEE42A1AF2388C0092D6F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				3EDEE4811AF28C850092D6F7 /* IPContactsTableViewCell.m */,
 				3ED58D271AF79E1C00A0ED37 /* IPCallTableViewCell.h */,
 				3ED58D281AF79E1C00A0ED37 /* IPCallTableViewCell.m */,
+				3EDBCFB21AF9FFBE00C5B833 /* IPDialerCollectionViewCell.h */,
+				3EDBCFB31AF9FFBE00C5B833 /* IPDialerCollectionViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				3EDEE42E1AF2388C0092D6F7 /* IPAppDelegate.m in Sources */,
 				3EDEE45F1AF25D430092D6F7 /* IPCallsTableViewController.m in Sources */,
 				3EDEE47C1AF27F660092D6F7 /* IPContact.m in Sources */,
+				3EDBCFB41AF9FFBE00C5B833 /* IPDialerCollectionViewCell.m in Sources */,
 				3EDEE4731AF265720092D6F7 /* IPDialerViewController.m in Sources */,
 				3EDEE47F1AF27F840092D6F7 /* IPCall.m in Sources */,
 				3EDEE42B1AF2388C0092D6F7 /* main.m in Sources */,

@@ -8,13 +8,15 @@
 
 #import "IPDialerViewController.h"
 #import "IPNewContactViewController.h"
+#import "IPDialerCollectionViewCell.h"
 
 @interface IPDialerViewController () {
     NSArray * _buttonLabels;
+
+    CGFloat _calculatedButtonSize;
 }
 
 @end
-
 static NSString * sCellIdentifier = @"collectionID";
 
 @implementation IPDialerViewController
@@ -22,7 +24,7 @@ static NSString * sCellIdentifier = @"collectionID";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _buttonLabels = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#", @"+", @"Call", @"<-"];
+        _buttonLabels = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"0", @"#"];
     }
     return self;
 }
@@ -30,7 +32,34 @@ static NSString * sCellIdentifier = @"collectionID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dialerCollectionView.backgroundColor = [UIColor whiteColor];
-    [_dialerCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:sCellIdentifier];
+    [_dialerCollectionView registerClass:[IPDialerCollectionViewCell class] forCellWithReuseIdentifier:sCellIdentifier];
+
+    CGFloat totalWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat totalHeight = [[UIScreen mainScreen] bounds].size.height;
+
+    _calculatedButtonSize = 0.1f * totalHeight <= 60.0f ? 0.1f * totalHeight : 60.0f;
+    CGFloat calculatedWidthMinusInsets = 2 * 20.0f + 3 * _calculatedButtonSize;
+
+    CGFloat insetWidth = (totalWidth - calculatedWidthMinusInsets) / 2.0f;
+    CGFloat contentInset = 0.77 * totalHeight - 40.0f - 5 * _calculatedButtonSize - 5 * 20.0f;
+    contentInset = contentInset > 0.0f ? contentInset : 0.0f;
+    [_dialerCollectionView setContentInset:UIEdgeInsetsMake(contentInset, insetWidth, 0.0f, insetWidth)];
+
+    [_addContactButton addTarget:self action:@selector(presentNewContactView:) forControlEvents:UIControlEventTouchUpInside];
+    [_deleteButton addTarget:self action:@selector(deleteNumberInTextView:) forControlEvents:UIControlEventTouchUpInside];
+    _callButton.layer.cornerRadius = _calculatedButtonSize / 2.0f;
+    _callButton.clipsToBounds = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_callButton(size)]" options:0 metrics:@{@"size":[NSNumber numberWithFloat:_calculatedButtonSize]} views:NSDictionaryOfVariableBindings(_callButton)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_callButton(size)]" options:0 metrics:@{@"size":[NSNumber numberWithFloat:_calculatedButtonSize]} views:NSDictionaryOfVariableBindings(_callButton)]];
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(_calculatedButtonSize, _calculatedButtonSize);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -40,38 +69,39 @@ static NSString * sCellIdentifier = @"collectionID";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
-    UIButton * button = [[UIButton alloc] init];
-    button.translatesAutoresizingMaskIntoConstraints = NO;
-    [button setTitle:_buttonLabels[indexPath.row] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    button.layer.borderWidth = 1.0f;
-    button.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    button.layer.cornerRadius = 30.0f;
-    [cell.contentView addSubview:button];
-    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[button(60)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
-    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button(60)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(button)]];
-    [button addTarget:self action:@selector(updateTextViewWithPressedButton:) forControlEvents:UIControlEventTouchUpInside];
+    IPDialerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.dialerNumberSize = [NSNumber numberWithFloat:_calculatedButtonSize];
+    [cell setDialerNumberText:_buttonLabels[indexPath.row] touchUpSelector:@selector(updateTextViewWithPressedButton:)];
+
     return cell;
 }
 
-
 #pragma mark - Action Handlers
 
-- (void)updateTextViewWithPressedButton:(id)sender {
-    if ([[[sender titleLabel] text] isEqualToString:@"<-"]){
-        if (_dialerTextView.text.length > 0) {
-            _dialerTextView.text = [_dialerTextView.text substringToIndex:(_dialerTextView.text.length - 1)];
-        }
-    } else if ([[[sender titleLabel] text] isEqualToString:@"+"]) {
-        IPNewContactViewController * newContactViewController = [[IPNewContactViewController alloc] init];
-        UINavigationController * newContactNavigationController = [[UINavigationController alloc] initWithRootViewController:newContactViewController];
-        [self presentViewController:newContactNavigationController animated:YES completion:nil];
+- (void)presentNewContactView:(id)sender {
+    IPNewContactViewController * newContactViewController = [[IPNewContactViewController alloc] init];
+    UINavigationController * newContactNavigationController = [[UINavigationController alloc] initWithRootViewController:newContactViewController];
+    [self presentViewController:newContactNavigationController animated:YES completion:^{
+        newContactViewController.phoneTextField.text = _dialerTextView.text;
+    }];
+}
 
-    } else if ([[[sender titleLabel] text] isEqualToString:@"Call"]) {
-
-    } else {
-        _dialerTextView.text = [_dialerTextView.text stringByAppendingString:[[sender titleLabel] text]];
+- (void)deleteNumberInTextView:(id)sender {
+    if (_dialerTextView.text.length > 0) {
+        _dialerTextView.text = [_dialerTextView.text substringToIndex:(_dialerTextView.text.length - 1)];
     }
+    if (_dialerTextView.text.length == 0) {
+        _addContactButton.hidden = YES;
+        _deleteButton.hidden = YES;
+    }
+}
+
+- (void)updateTextViewWithPressedButton:(id)sender {
+    if (_dialerTextView.text.length == 0) {
+        _addContactButton.hidden = NO;
+        _deleteButton.hidden = NO;
+    }
+    _dialerTextView.text = [_dialerTextView.text stringByAppendingString:[[sender titleLabel] text]];
 }
 @end
