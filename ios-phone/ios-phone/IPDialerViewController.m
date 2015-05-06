@@ -72,18 +72,19 @@ static NSString * sCellIdentifier = @"collectionID";
     IPDialerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
     cell.dialerNumberSize = [NSNumber numberWithFloat:_calculatedButtonSize];
-    [cell setDialerNumberText:_buttonLabels[indexPath.row]];
+    [cell setDialerNumberText:_buttonLabels[indexPath.row] touchUpSelector:@selector(updateTextViewWithPressedButton:)];
 
     return cell;
 }
-
 
 #pragma mark - Action Handlers
 
 - (void)presentNewContactView:(id)sender {
     IPNewContactViewController * newContactViewController = [[IPNewContactViewController alloc] init];
     UINavigationController * newContactNavigationController = [[UINavigationController alloc] initWithRootViewController:newContactViewController];
-    [self presentViewController:newContactNavigationController animated:YES completion:nil];
+    [self presentViewController:newContactNavigationController animated:YES completion:^{
+        newContactViewController.phoneTextField.text = _dialerTextView.text;
+    }];
 }
 
 - (void)deleteNumberInTextView:(id)sender {
