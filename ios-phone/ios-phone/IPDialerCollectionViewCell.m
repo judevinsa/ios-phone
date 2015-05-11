@@ -10,11 +10,11 @@
 
 @implementation IPDialerCollectionViewCell
 
-- (void)setDialerNumberText:(NSString *)numberText {
-    if (!_dialerNumberLabel) {
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
         _dialerNumberLabel = [[UILabel alloc] init];
         _dialerNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _dialerNumberLabel.text = numberText;
         _dialerNumberLabel.textColor = [UIColor lightGrayColor];
         _dialerNumberLabel.textAlignment = NSTextAlignmentCenter;
         _dialerNumberLabel.layer.borderWidth = 1.0f;
@@ -29,8 +29,11 @@
         selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
         selectedBackgroundView.layer.cornerRadius = [_dialerNumberSize floatValue] / 2.0f;
         [self setSelectedBackgroundView:selectedBackgroundView];
-    } else {
-        _dialerNumberLabel.text = numberText;
     }
+    return self;
+}
+
+- (void)setDialerNumberText:(NSString *)numberText {
+        _dialerNumberLabel.text = numberText;
 }
 @end
