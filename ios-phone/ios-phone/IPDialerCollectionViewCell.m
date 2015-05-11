@@ -33,19 +33,4 @@
         _dialerNumberLabel.text = numberText;
     }
 }
-
-#pragma mark - Action Handlers 
-
-// Visual Overlay when touched
-
-- (void)touchInDisplay:(id)sender {
-    _dialerNumberLabel.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.5f];
-
-}
-
-- (void)touchUpDisplay:(id)sender {
-    _dialerNumberLabel.backgroundColor = [UIColor clearColor];
-
-}
-
 @end
