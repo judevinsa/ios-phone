@@ -10,9 +10,8 @@
 
 @interface IPDialerCollectionViewCell : UICollectionViewCell
 
-- (void)setDialerNumberText:(NSString *)numberText touchUpSelector:(SEL)touchUpSelector;
+- (void)setDialerNumberText:(NSString *)numberText;
 
-@property (nonatomic) UIButton * dialerNumberButton;
-@property (nonatomic) id delegate;
+@property (nonatomic) UILabel * dialerNumberLabel;
 @property (nonatomic) NSNumber * dialerNumberSize;
 @end

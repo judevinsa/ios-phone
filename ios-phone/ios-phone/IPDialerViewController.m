@@ -16,6 +16,7 @@
     CGFloat _calculatedButtonSize;
 }
 
+- (void)_updateTextViewWithDialedText:(NSString *)dialedText;
 @end
 static NSString * sCellIdentifier = @"collectionID";
 
@@ -52,6 +53,7 @@ static NSString * sCellIdentifier = @"collectionID";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_callButton(size)]" options:0 metrics:@{@"size":[NSNumber numberWithFloat:_calculatedButtonSize]} views:NSDictionaryOfVariableBindings(_callButton)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_callButton(size)]" options:0 metrics:@{@"size":[NSNumber numberWithFloat:_calculatedButtonSize]} views:NSDictionaryOfVariableBindings(_callButton)]];
 }
@@ -70,11 +72,16 @@ static NSString * sCellIdentifier = @"collectionID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     IPDialerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
     cell.dialerNumberSize = [NSNumber numberWithFloat:_calculatedButtonSize];
-    [cell setDialerNumberText:_buttonLabels[indexPath.row] touchUpSelector:@selector(updateTextViewWithPressedButton:)];
+    [cell setDialerNumberText:_buttonLabels[indexPath.row]];
 
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    IPDialerCollectionViewCell * cell = (IPDialerCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self _updateTextViewWithDialedText:cell.dialerNumberLabel.text];
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Action Handlers
@@ -97,11 +104,11 @@ static NSString * sCellIdentifier = @"collectionID";
     }
 }
 
-- (void)updateTextViewWithPressedButton:(id)sender {
+- (void)_updateTextViewWithDialedText:(NSString *)dialedText {
     if (_dialerTextView.text.length == 0) {
         _addContactButton.hidden = NO;
         _deleteButton.hidden = NO;
     }
-    _dialerTextView.text = [_dialerTextView.text stringByAppendingString:[[sender titleLabel] text]];
+    _dialerTextView.text = [_dialerTextView.text stringByAppendingString:dialedText];
 }
 @end

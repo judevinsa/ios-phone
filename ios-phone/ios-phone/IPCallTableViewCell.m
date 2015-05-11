@@ -15,6 +15,7 @@
 }
 
 - (void)prepareForReuse {
+    [super prepareForReuse];
     _contactFirstNameLabel.text = @"";
     _contactLastNameLabel.text = @"";
     _dateLabel.text = @"";

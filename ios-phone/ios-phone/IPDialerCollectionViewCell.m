@@ -10,24 +10,27 @@
 
 @implementation IPDialerCollectionViewCell
 
-- (void)setDialerNumberText:(NSString *)numberText touchUpSelector:(SEL)touchUpSelector {
-    if (!_dialerNumberButton) {
-        _dialerNumberButton = [[UIButton alloc] init];
-        _dialerNumberButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_dialerNumberButton setTitle:numberText forState:UIControlStateNormal];
-        [_dialerNumberButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [_dialerNumberButton setTintColor:[UIColor redColor]];
-        _dialerNumberButton.layer.borderWidth = 1.0f;
-        _dialerNumberButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        _dialerNumberButton.layer.cornerRadius = [_dialerNumberSize floatValue] / 2.0f;
-        [self.contentView addSubview:_dialerNumberButton];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dialerNumberButton(size)]|" options:0 metrics:@{@"size":_dialerNumberSize} views:NSDictionaryOfVariableBindings(_dialerNumberButton)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dialerNumberButton(size)]|" options:0 metrics:@{@"size":_dialerNumberSize} views:NSDictionaryOfVariableBindings(_dialerNumberButton)]];
-        [_dialerNumberButton addTarget:_delegate action:touchUpSelector forControlEvents:UIControlEventTouchUpInside];
-        [_dialerNumberButton addTarget:self action:@selector(touchInDisplay:) forControlEvents:UIControlEventTouchDown];
-        [_dialerNumberButton addTarget:self action:@selector(touchUpDisplay:) forControlEvents:UIControlEventTouchUpInside];
+- (void)setDialerNumberText:(NSString *)numberText {
+    if (!_dialerNumberLabel) {
+        _dialerNumberLabel = [[UILabel alloc] init];
+        _dialerNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _dialerNumberLabel.text = numberText;
+        _dialerNumberLabel.textColor = [UIColor lightGrayColor];
+        _dialerNumberLabel.textAlignment = NSTextAlignmentCenter;
+        _dialerNumberLabel.layer.borderWidth = 1.0f;
+        _dialerNumberLabel.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        _dialerNumberLabel.layer.cornerRadius = [_dialerNumberSize floatValue] / 2.0f;
+        [self.contentView addSubview:_dialerNumberLabel];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dialerNumberLabel(size)]|" options:0 metrics:@{@"size":_dialerNumberSize} views:NSDictionaryOfVariableBindings(_dialerNumberLabel)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dialerNumberLabel(size)]|" options:0 metrics:@{@"size":_dialerNumberSize} views:NSDictionaryOfVariableBindings(_dialerNumberLabel)]];
+
+        // We then set the selectedBackgroundView
+        UIView * selectedBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
+        selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        selectedBackgroundView.layer.cornerRadius = [_dialerNumberSize floatValue] / 2.0f;
+        [self setSelectedBackgroundView:selectedBackgroundView];
     } else {
-        [_dialerNumberButton setTitle:numberText forState:UIControlStateNormal];
+        _dialerNumberLabel.text = numberText;
     }
 }
 
@@ -36,13 +39,13 @@
 // Visual Overlay when touched
 
 - (void)touchInDisplay:(id)sender {
-    _dialerNumberButton.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.5f];
-    [_dialerNumberButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _dialerNumberLabel.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.5f];
+
 }
 
 - (void)touchUpDisplay:(id)sender {
-    _dialerNumberButton.backgroundColor = [UIColor clearColor];
-    [_dialerNumberButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    _dialerNumberLabel.backgroundColor = [UIColor clearColor];
+
 }
 
 @end
