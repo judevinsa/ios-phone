@@ -10,8 +10,5 @@
 
 @interface IPDialerCollectionViewCell : UICollectionViewCell
 
-- (void)setDialerNumberText:(NSString *)numberText;
-
 @property (nonatomic) UILabel * dialerNumberLabel;
-@property (nonatomic) NSNumber * dialerNumberSize;
 @end

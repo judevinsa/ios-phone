@@ -71,9 +71,8 @@ static NSString * sCellIdentifier = @"collectionID";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    IPDialerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
-    cell.dialerNumberSize = [NSNumber numberWithFloat:_calculatedButtonSize];
-    [cell setDialerNumberText:_buttonLabels[indexPath.row]];
+    IPDialerCollectionViewCell * cell = (IPDialerCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:sCellIdentifier forIndexPath:indexPath];
+    cell.dialerNumberLabel.text = _buttonLabels[indexPath.row];
 
     return cell;
 }

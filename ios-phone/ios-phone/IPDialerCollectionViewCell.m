@@ -8,6 +8,12 @@
 
 #import "IPDialerCollectionViewCell.h"
 
+@interface IPDialerCollectionViewCell () {
+    UIView * _selectedBackgroundView;
+}
+
+@end
+
 @implementation IPDialerCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -19,21 +25,23 @@
         _dialerNumberLabel.textAlignment = NSTextAlignmentCenter;
         _dialerNumberLabel.layer.borderWidth = 1.0f;
         _dialerNumberLabel.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        _dialerNumberLabel.layer.cornerRadius = [_dialerNumberSize floatValue] / 2.0f;
+
         [self.contentView addSubview:_dialerNumberLabel];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dialerNumberLabel(size)]|" options:0 metrics:@{@"size":_dialerNumberSize} views:NSDictionaryOfVariableBindings(_dialerNumberLabel)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dialerNumberLabel(size)]|" options:0 metrics:@{@"size":_dialerNumberSize} views:NSDictionaryOfVariableBindings(_dialerNumberLabel)]];
+        _dialerNumberLabel.layer.cornerRadius = frame.size.width / 2.0f;
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dialerNumberLabel]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_dialerNumberLabel)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dialerNumberLabel]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_dialerNumberLabel)]];
 
         // We then set the selectedBackgroundView
-        UIView * selectedBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
-        selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
-        selectedBackgroundView.layer.cornerRadius = [_dialerNumberSize floatValue] / 2.0f;
-        [self setSelectedBackgroundView:selectedBackgroundView];
+        _selectedBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
+        _selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        _selectedBackgroundView.layer.cornerRadius =  frame.size.width / 2.0f;
+        [self setSelectedBackgroundView:_selectedBackgroundView];
     }
     return self;
 }
 
-- (void)setDialerNumberText:(NSString *)numberText {
-        _dialerNumberLabel.text = numberText;
+- (void)prepareForReuse {
+    _dialerNumberLabel.text = @"";
 }
+
 @end
